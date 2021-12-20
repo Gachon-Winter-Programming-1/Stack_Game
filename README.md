@@ -1,6 +1,7 @@
 # Gachon Winter Game Project - Stack
 
 [KOR]
+
 2021년도 겨울학기, 게임프로젝트 시간에 제작할 Stack의 레포지토리입니다.
 
 모든 리소스에 대한 권리는
@@ -9,6 +10,7 @@
 ---
 
 [ENG]
+
 This is Stack's repository to be produced during the winter semester of 2021.
 
 The rights to all resources belong to
