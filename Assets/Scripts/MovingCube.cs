@@ -65,6 +65,7 @@ public class MovingCube : MonoBehaviour
         else if(Mathf.Abs(hangover) < correction_value)
         {
             transform.position = new Vector3(LastCube.transform.position.x,transform.position.y,LastCube.transform.position.z);
+            GameManager.Instance.ScoreUp();
         }
         else{
             float direction = hangover > 0 ? 1 : -1;
@@ -77,6 +78,7 @@ public class MovingCube : MonoBehaviour
             {
                 SplitCubeOnX(hangover,direction);
             }
+            GameManager.Instance.ScoreUp();
         }
 
 

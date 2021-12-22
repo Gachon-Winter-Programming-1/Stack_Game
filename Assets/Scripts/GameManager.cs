@@ -9,7 +9,8 @@ public class GameManager : MonoBehaviour
     private int spawnerIndex;
     private CubeSpawner currentSpawner;
 
-    public bool isEnd;
+    internal bool isEnd;
+    public int gameScore;
     private void Awake()
     {
         if(null == instance)
@@ -33,6 +34,7 @@ public class GameManager : MonoBehaviour
 
     private void Start() {
         isEnd = false;
+        gameScore = 0;
     }
     // Update is called once per frame
     void Update()
@@ -57,5 +59,10 @@ public class GameManager : MonoBehaviour
     internal void EndGame()
     {
         isEnd=true;
+    }
+
+    internal void ScoreUp()
+    {
+        gameScore++;
     }
 }
