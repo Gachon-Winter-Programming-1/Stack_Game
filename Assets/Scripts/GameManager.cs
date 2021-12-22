@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
     private CubeSpawner[] spawners;
     private int spawnerIndex;
     private CubeSpawner currentSpawner;
-    
+
     internal bool isEnd;
 
     [SerializeField]
@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
     private int PerfectCount;
     private void Awake()
     {
-        if(null == instance)
+        if (null == instance)
         {
             instance = this;
         }
@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
     {
         get
         {
-            if(null == instance)
+            if (null == instance)
             {
                 return null;
             }
@@ -38,7 +38,8 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void Start() {
+    private void Start()
+    {
         isEnd = false;
         gameScore = 0;
         PerfectCount = 0;
@@ -46,19 +47,19 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetButtonDown("Fire1"))
-        {   
-            if(isEnd)
+        if (Input.GetButtonDown("Fire1"))
+        {
+            if (isEnd)
             {
                 LoadScene();
             }
 
-            if(MovingCube.CurrentCube != null)
+            if (MovingCube.CurrentCube != null)
                 MovingCube.CurrentCube.Stop();
-            
-            if(!isEnd)
+
+            if (!isEnd)
             {
-                GameObject.Find("Main Camera").GetComponent<CameraController>().CameraMoveUp();
+                GameObject.Find("@Main Camera").GetComponent<CameraController>().CameraMoveUp();
 
                 spawnerIndex = spawnerIndex == 0 ? 1 : 0;
                 currentSpawner = spawners[spawnerIndex];
@@ -67,10 +68,10 @@ public class GameManager : MonoBehaviour
             }
         }
     }
-    
+
     internal void EndGame()
     {
-        isEnd=true;
+        isEnd = true;
     }
 
     internal void ScoreUp()

@@ -34,7 +34,7 @@ public class MovingCube : MonoBehaviour
     {
         if (LastCube == null)
         {
-            LastCube = GameObject.Find("Start").GetComponent<MovingCube>();
+            LastCube = GameObject.Find("@Start").GetComponent<MovingCube>();
         }
         if (this != LastCube)
             CurrentCube = this;

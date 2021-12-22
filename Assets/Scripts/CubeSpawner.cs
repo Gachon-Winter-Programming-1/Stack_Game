@@ -8,24 +8,25 @@ public class CubeSpawner : MonoBehaviour
     private MovingCube cubePrefab;
     [SerializeField]
     private MoveDirection moveDirection;
-    
-    private void Start() {
-        Transform startTransform = GameObject.Find("Start").transform;
+
+    private void Start()
+    {
+        Transform startTransform = GameObject.Find("@Start").transform;
         transform.position = new Vector3(transform.position.x,
-        startTransform.localScale.y/2 + cubePrefab.transform.localScale.y/2,
+        startTransform.localScale.y / 2 + cubePrefab.transform.localScale.y / 2,
         transform.position.z);
     }
     public void SpawnCube()
     {
         var cube = Instantiate(cubePrefab);
 
-        if(MovingCube.LastCube != null  &&  MovingCube.LastCube.gameObject != GameObject.Find("Start"))
+        if (MovingCube.LastCube != null && MovingCube.LastCube.gameObject != GameObject.Find("Start"))
         {
             float x = moveDirection == MoveDirection.X ? transform.position.x : MovingCube.LastCube.transform.position.x;
             float z = moveDirection == MoveDirection.Z ? transform.position.z : MovingCube.LastCube.transform.position.z;
 
             cube.transform.position = new Vector3(x,
-            MovingCube.LastCube.transform.position.y + MovingCube.LastCube.transform.localScale.y/2 + cubePrefab.transform.localScale.y/2,
+            MovingCube.LastCube.transform.position.y + MovingCube.LastCube.transform.localScale.y / 2 + cubePrefab.transform.localScale.y / 2,
             z);
         }
         else
@@ -33,10 +34,11 @@ public class CubeSpawner : MonoBehaviour
             cube.transform.position = transform.position;
         }
         cube.MoveDirection = moveDirection;
-        
+
     }
-    private void OnDrawGizmos() {
+    private void OnDrawGizmos()
+    {
         Gizmos.color = Color.green;
-        Gizmos.DrawWireCube(transform.position,cubePrefab.transform.localScale);
+        Gizmos.DrawWireCube(transform.position, cubePrefab.transform.localScale);
     }
 }
