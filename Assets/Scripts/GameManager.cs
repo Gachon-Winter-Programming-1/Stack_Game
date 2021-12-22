@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -41,6 +42,11 @@ public class GameManager : MonoBehaviour
     {
         if(Input.GetButtonDown("Fire1"))
         {   
+            if(isEnd)
+            {
+                LoadScene();
+            }
+
             if(MovingCube.CurrentCube != null)
                 MovingCube.CurrentCube.Stop();
             
@@ -64,5 +70,10 @@ public class GameManager : MonoBehaviour
     internal void ScoreUp()
     {
         gameScore++;
+    }
+
+    internal void LoadScene()
+    {
+        SceneManager.LoadScene(0);
     }
 }
