@@ -11,8 +11,12 @@ public class GameManager : MonoBehaviour
     private CubeSpawner currentSpawner;
     
     internal bool isEnd;
-    public int gameScore;
-    public int PerfectCount;
+
+    [SerializeField]
+    private int gameScore;
+
+    [SerializeField]
+    private int PerfectCount;
     private void Awake()
     {
         if(null == instance)
@@ -87,5 +91,10 @@ public class GameManager : MonoBehaviour
     internal void PerfectCountReset()
     {
         PerfectCount = 0;
+    }
+
+    internal int PerfectCountCheck()
+    {
+        return PerfectCount;
     }
 }

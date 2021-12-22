@@ -111,3 +111,7 @@ MonoBehaviour:
   moveSpeed: 1.3
   correction_value: 0.04
   DropCube: {fileID: 2484270416905475242, guid: d749793e24f2d6d4586497588d9a6a72, type: 3}
+  isStartCube: 0
+  objectScaleUpPoint: 0.6
+  objectScaleUpOver: 1.1
+  objectScaleUpUnder: 1.3
