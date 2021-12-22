@@ -9,9 +9,10 @@ public class GameManager : MonoBehaviour
     private CubeSpawner[] spawners;
     private int spawnerIndex;
     private CubeSpawner currentSpawner;
-
+    
     internal bool isEnd;
     public int gameScore;
+    public int PerfectCount;
     private void Awake()
     {
         if(null == instance)
@@ -36,6 +37,7 @@ public class GameManager : MonoBehaviour
     private void Start() {
         isEnd = false;
         gameScore = 0;
+        PerfectCount = 0;
     }
     // Update is called once per frame
     void Update()
@@ -75,5 +77,15 @@ public class GameManager : MonoBehaviour
     internal void LoadScene()
     {
         SceneManager.LoadScene(0);
+    }
+
+    internal void PerfectCountUp()
+    {
+        PerfectCount++;
+    }
+
+    internal void PerfectCountReset()
+    {
+        PerfectCount = 0;
     }
 }

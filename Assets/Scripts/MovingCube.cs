@@ -19,6 +19,9 @@ public class MovingCube : MonoBehaviour
     [SerializeField]
     private GameObject DropCube;
 
+    [SerializeField]
+    private bool isStartCube;
+
     private void OnEnable() {
         if(LastCube == null)
         {
@@ -29,6 +32,9 @@ public class MovingCube : MonoBehaviour
 
         boxDirection = 1f;
         transform.localScale = new Vector3(LastCube.transform.localScale.x, transform.localScale.y, LastCube.transform.localScale.z);
+
+        if(!isStartCube)
+            moveSpeed = -1.3f * ((transform.localScale.x + transform.localScale.z) / 2) + 2.6f;
     }
     void Update()
     {
@@ -56,7 +62,7 @@ public class MovingCube : MonoBehaviour
         float hangover = GetHangover();
 
         float max = MoveDirection == MoveDirection.Z ? LastCube.transform.localScale.z:LastCube.transform.localScale.x;
-        if(Mathf.Abs(hangover) >= max)
+        if(Mathf.Abs(hangover) >= max) // 실패
         {
             LastCube = null;
             CurrentCube = null;
@@ -65,12 +71,13 @@ public class MovingCube : MonoBehaviour
 
             GameManager.Instance.EndGame();
         }
-        else if(Mathf.Abs(hangover) < correction_value)
+        else if(Mathf.Abs(hangover) < correction_value) // 보정값을 포함한 완벽
         {
             transform.position = new Vector3(LastCube.transform.position.x,transform.position.y,LastCube.transform.position.z);
             GameManager.Instance.ScoreUp();
+            GameManager.Instance.PerfectCountUp();
         }
-        else{
+        else{   // 잘릴때
             float direction = hangover > 0 ? 1 : -1;
 
             if(MoveDirection == MoveDirection.Z)
@@ -82,6 +89,7 @@ public class MovingCube : MonoBehaviour
                 SplitCubeOnX(hangover,direction);
             }
             GameManager.Instance.ScoreUp();
+            GameManager.Instance.PerfectCountReset();
         }
 
 
