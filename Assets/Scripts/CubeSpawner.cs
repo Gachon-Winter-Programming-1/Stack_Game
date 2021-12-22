@@ -9,6 +9,12 @@ public class CubeSpawner : MonoBehaviour
     [SerializeField]
     private MoveDirection moveDirection;
     
+    private void Start() {
+        Transform startTransform = GameObject.Find("Start").transform;
+        transform.position = new Vector3(transform.position.x,
+        startTransform.localScale.y/2 + cubePrefab.transform.localScale.y/2,
+        transform.position.z);
+    }
     public void SpawnCube()
     {
         var cube = Instantiate(cubePrefab);

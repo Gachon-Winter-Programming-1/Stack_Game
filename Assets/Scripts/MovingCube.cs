@@ -16,6 +16,9 @@ public class MovingCube : MonoBehaviour
 
     private float boxDirection;
 
+    [SerializeField]
+    private GameObject DropCube;
+
     private void OnEnable() {
         if(LastCube == null)
         {
@@ -127,7 +130,7 @@ public class MovingCube : MonoBehaviour
     }
     private void SpawnDropCube(float fallingBlockPosition, float fallingBlockSize)
     {
-        var cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        var cube = Instantiate(DropCube);
 
         if(MoveDirection == MoveDirection.Z)
         {
