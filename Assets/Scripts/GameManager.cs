@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Singleton;
 
-public class GameManager : MonoBehaviour
+public class GameManager : Singleton<GameManager>
 {
-    private static GameManager instance = null;
     private CubeSpawner[] spawners;
     private int spawnerIndex;
     private CubeSpawner currentSpawner;
@@ -17,25 +17,10 @@ public class GameManager : MonoBehaviour
 
     [SerializeField]
     private int PerfectCount;
+
     private void Awake()
     {
-        if (null == instance)
-        {
-            instance = this;
-        }
-
         spawners = FindObjectsOfType<CubeSpawner>();
-    }
-    public static GameManager Instance
-    {
-        get
-        {
-            if (null == instance)
-            {
-                return null;
-            }
-            return instance;
-        }
     }
 
     private void Start()
