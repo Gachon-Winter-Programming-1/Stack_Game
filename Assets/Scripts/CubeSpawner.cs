@@ -36,9 +36,9 @@ public class CubeSpawner : MonoBehaviour
         cube.MoveDirection = moveDirection;
 
     }
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireCube(transform.position, cubePrefab.transform.localScale);
-    }
+    // private void OnDrawGizmos()
+    // {
+    //     Gizmos.color = Color.green;
+    //     Gizmos.DrawWireCube(transform.position, cubePrefab.transform.localScale);
+    // }
 }

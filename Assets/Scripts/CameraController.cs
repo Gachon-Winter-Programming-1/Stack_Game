@@ -9,7 +9,7 @@ public class CameraController : Singleton<CameraController>
     private MovingCube cubePrefab;
     internal void CameraMoveUp()
     {
-        
-        transform.position = new Vector3(transform.position.x,transform.position.y + cubePrefab.transform.localScale.y,transform.position.z);
+
+        transform.position = new Vector3(transform.position.x, transform.position.y + cubePrefab.transform.localScale.y, transform.position.z);
     }
 }

@@ -11,6 +11,8 @@ public class GameManager : Singleton<GameManager>
     private int spawnerIndex;
     private CubeSpawner currentSpawner;
 
+    private CameraController cam;
+
     [SerializeField]
     private bool isEnd;
 
@@ -29,7 +31,7 @@ public class GameManager : Singleton<GameManager>
 
     private void Start()
     {
-        
+        cam = GameObject.Find("@Main Camera").GetComponent<CameraController>();
     }
     // Update is called once per frame
     void Update()
@@ -48,8 +50,8 @@ public class GameManager : Singleton<GameManager>
             if (!isEnd)
             {
                 // TODO : GameObject.Find() func is decrease to Performance. Change Camera cache variable.
-                GameObject.Find("@Main Camera").GetComponent<CameraController>().CameraMoveUp();
-                
+                cam.CameraMoveUp();
+
                 spawnerIndex = spawnerIndex == 0 ? 1 : 0;
                 currentSpawner = spawners[spawnerIndex];
 
@@ -63,7 +65,7 @@ public class GameManager : Singleton<GameManager>
     internal void ScoreUp()
     {
         GameScore++;
-        Debug.Log("Score UP : "+ GameScore);
+        Debug.Log("Score UP : " + GameScore);
     }
 
     internal void LoadScene() => SceneManager.LoadScene(0);
