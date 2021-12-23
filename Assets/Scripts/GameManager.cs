@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Singleton;
+using UnityEngine.Serialization;
 
 public class GameManager : Singleton<GameManager>
 {
@@ -10,24 +11,25 @@ public class GameManager : Singleton<GameManager>
     private int spawnerIndex;
     private CubeSpawner currentSpawner;
 
-    internal bool isEnd;
+    [SerializeField]
+    private bool isEnd;
+
+    public int GameScore { get; private set; }
 
     [SerializeField]
-    private int gameScore;
-
-    [SerializeField]
-    private int PerfectCount;
+    private int perfectCount;
 
     private void Awake()
     {
+        isEnd = false;
+        GameScore = 0;
+        perfectCount = 0;
         spawners = FindObjectsOfType<CubeSpawner>();
     }
 
     private void Start()
     {
-        isEnd = false;
-        gameScore = 0;
-        PerfectCount = 0;
+        
     }
     // Update is called once per frame
     void Update()
@@ -36,6 +38,7 @@ public class GameManager : Singleton<GameManager>
         {
             if (isEnd)
             {
+                // TODO : Need to Change Component Reset Func
                 LoadScene();
             }
 
@@ -44,8 +47,9 @@ public class GameManager : Singleton<GameManager>
 
             if (!isEnd)
             {
+                // TODO : GameObject.Find() func is decrease to Performance. Change Camera cache variable.
                 GameObject.Find("@Main Camera").GetComponent<CameraController>().CameraMoveUp();
-
+                
                 spawnerIndex = spawnerIndex == 0 ? 1 : 0;
                 currentSpawner = spawners[spawnerIndex];
 
@@ -54,33 +58,19 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
-    internal void EndGame()
-    {
-        isEnd = true;
-    }
+    internal void EndGame() => isEnd = true;
 
     internal void ScoreUp()
     {
-        gameScore++;
+        GameScore++;
+        Debug.Log("Score UP : "+ GameScore);
     }
 
-    internal void LoadScene()
-    {
-        SceneManager.LoadScene(0);
-    }
+    internal void LoadScene() => SceneManager.LoadScene(0);
 
-    internal void PerfectCountUp()
-    {
-        PerfectCount++;
-    }
+    internal void PerfectCountUp() => perfectCount++;
 
-    internal void PerfectCountReset()
-    {
-        PerfectCount = 0;
-    }
+    internal void PerfectCountReset() => perfectCount = 0;
 
-    internal int PerfectCountCheck()
-    {
-        return PerfectCount;
-    }
+    internal int PerfectCountCheck() => perfectCount;
 }
