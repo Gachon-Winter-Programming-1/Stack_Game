@@ -89,6 +89,8 @@ public class MovingCube : MonoBehaviour
             transform.position = new Vector3(LastCube.transform.position.x, transform.position.y, LastCube.transform.position.z);
             GameManager.Instance.ScoreUp();
             GameManager.Instance.PerfectCountUp();
+            AttachWindow();
+            GameManager.Instance.AddCubeToBeSaved(CurrentCube.gameObject);
         }
         else
         {   // 잘릴때
@@ -104,6 +106,8 @@ public class MovingCube : MonoBehaviour
             }
             GameManager.Instance.ScoreUp();
             GameManager.Instance.PerfectCountReset();
+            AttachWindow();
+            GameManager.Instance.AddCubeToBeSaved(CurrentCube.gameObject);
         }
         if (GameManager.Instance.PerfectCountCheck() == 8)
         {
@@ -132,36 +136,38 @@ public class MovingCube : MonoBehaviour
 
         LastCube = this;
         Debug.Log(Mathf.Abs(hangover));
-        AttachWindow();
     }
     private void AttachWindow()
     {
-        float HowManyWindowZ = LastCube.transform.localScale.x / ((windowPrefab.transform.localScale.x + betweenWindows) * 10);
-        float HowManyWindowX = LastCube.transform.localScale.z / ((windowPrefab.transform.localScale.x + betweenWindows) * 10);
+        float HowManyWindowZ = CurrentCube.transform.localScale.x / ((windowPrefab.transform.localScale.x + betweenWindows) * 10);
+        float HowManyWindowX = CurrentCube.transform.localScale.z / ((windowPrefab.transform.localScale.x + betweenWindows) * 10);
 
         for (int i = 1; i < HowManyWindowZ; i++)
         {
             var window = Instantiate(windowPrefab);
             window.transform.position = new Vector3(
-            LastCube.transform.position.x + LastCube.transform.localScale.x / 2 - ((windowPrefab.transform.localScale.x + betweenWindows) * 10) * i + betweenWindows * 10,
-            LastCube.transform.position.y,
-            LastCube.transform.position.z + LastCube.transform.localScale.z / 2 + 0.001f);
+            CurrentCube.transform.position.x + CurrentCube.transform.localScale.x / 2 - ((windowPrefab.transform.localScale.x + betweenWindows) * 10) * i + betweenWindows * 10,
+            CurrentCube.transform.position.y,
+            CurrentCube.transform.position.z + CurrentCube.transform.localScale.z / 2 + 0.001f);
 
             window.transform.localRotation = Quaternion.Euler(90f, 0, 0);
+            window.transform.parent = CurrentCube.transform;
         }
 
         for (int i = 1; i < HowManyWindowX; i++)
         {
             var window = Instantiate(windowPrefab);
-            window.transform.position = new Vector3(LastCube.transform.position.x + LastCube.transform.localScale.x / 2 + 0.001f,
-            LastCube.transform.position.y,
-            LastCube.transform.position.z - LastCube.transform.localScale.z / 2 + ((windowPrefab.transform.localScale.x + betweenWindows) * 10) * i - betweenWindows * 10);
+            window.transform.position = new Vector3(CurrentCube.transform.position.x + CurrentCube.transform.localScale.x / 2 + 0.001f,
+            CurrentCube.transform.position.y,
+            CurrentCube.transform.position.z - CurrentCube.transform.localScale.z / 2 + ((windowPrefab.transform.localScale.x + betweenWindows) * 10) * i - betweenWindows * 10);
+
+            window.transform.parent = CurrentCube.transform;
         }
         Debug.Log("HowManyWindowZ" + HowManyWindowZ);
-        Debug.Log(LastCube.transform.localScale.x / HowManyWindowX);
+        Debug.Log(CurrentCube.transform.localScale.x / HowManyWindowX);
 
         Debug.Log("HowManyWindowX" + HowManyWindowX);
-        Debug.Log(LastCube.transform.localScale.x / HowManyWindowX);
+        Debug.Log(CurrentCube.transform.localScale.x / HowManyWindowX);
     }
 
     private float GetHangover()

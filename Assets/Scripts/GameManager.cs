@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using Singleton;
 using UnityEngine.Serialization;
+using UnityEditor;
 
 public class GameManager : Singleton<GameManager>
 {
@@ -12,6 +13,8 @@ public class GameManager : Singleton<GameManager>
     private CubeSpawner currentSpawner;
 
     private CameraController cam;
+
+    public List<GameObject> CubesToBeSaved;
 
     [SerializeField]
     private bool isEnd;
@@ -32,6 +35,7 @@ public class GameManager : Singleton<GameManager>
     private void Start()
     {
         cam = GameObject.Find("@Main Camera").GetComponent<CameraController>();
+        CubesToBeSaved = new List<GameObject>();
     }
     // Update is called once per frame
     void Update()
@@ -40,12 +44,15 @@ public class GameManager : Singleton<GameManager>
         {
             if (isEnd)
             {
+                SaveAllCubes();
                 // TODO : Need to Change Component Reset Func
                 LoadScene();
             }
 
             if (MovingCube.CurrentCube != null)
+            {
                 MovingCube.CurrentCube.Stop();
+            }
 
             if (!isEnd)
             {
@@ -58,6 +65,22 @@ public class GameManager : Singleton<GameManager>
                 currentSpawner.SpawnCube();
             }
         }
+    }
+    internal void AddCubeToBeSaved(GameObject gameObject) => CubesToBeSaved.Add(gameObject);
+
+    internal void SaveAllCubes()
+    {
+        GameObject Empty = new GameObject("Building");
+        foreach (GameObject gameObject in CubesToBeSaved)
+        {
+            gameObject.transform.parent = Empty.transform;
+        }
+
+        string localPath = "Assets/BuildingSaved/" + Empty.name + ".prefab";
+
+        localPath = AssetDatabase.GenerateUniqueAssetPath(localPath);
+
+        PrefabUtility.SaveAsPrefabAssetAndConnect(Empty, localPath, InteractionMode.UserAction);
     }
 
     internal void EndGame() => isEnd = true;
