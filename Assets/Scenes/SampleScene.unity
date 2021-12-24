@@ -299,8 +299,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1a0f13d906a5214fb5726f41aa430d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameScore: 0
-  PerfectCount: 0
+  CubesToBeSaved: []
+  isEnd: 0
+  perfectCount: 0
 --- !u!4 &434612845
 Transform:
   m_ObjectHideFlags: 0
@@ -504,7 +505,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96853a6a49cae4a4f8d44610c239dc3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cubePrefab: {fileID: 379853514073881812, guid: 52826acb2a98de04d9c0fd9d6be61e70, type: 3}
+  cubePrefab: {fileID: 379853514073881809, guid: 52826acb2a98de04d9c0fd9d6be61e70, type: 3}
 --- !u!1 &2034309290
 GameObject:
   m_ObjectHideFlags: 0
@@ -616,6 +617,8 @@ MonoBehaviour:
   moveSpeed: 0
   correction_value: 0
   DropCube: {fileID: 0}
+  windowPrefab: {fileID: 0}
+  betweenWindows: 0
   isStartCube: 1
   objectScaleUpPoint: 0.6
   objectScaleUpOver: 1.1
