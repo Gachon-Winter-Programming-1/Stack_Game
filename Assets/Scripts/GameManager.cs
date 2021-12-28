@@ -57,7 +57,7 @@ public class GameManager : Singleton<GameManager>
             if (!isEnd)
             {
                 // TODO : GameObject.Find() func is decrease to Performance. Change Camera cache variable.
-                cam.CameraMoveUp();
+                //cam.CameraMoveUp();
 
                 spawnerIndex = spawnerIndex == 0 ? 1 : 0;
                 currentSpawner = spawners[spawnerIndex];
@@ -81,6 +81,10 @@ public class GameManager : Singleton<GameManager>
         localPath = AssetDatabase.GenerateUniqueAssetPath(localPath);
 
         PrefabUtility.SaveAsPrefabAssetAndConnect(Empty, localPath, InteractionMode.UserAction);
+    }
+
+    public  void GameOver()
+    {
     }
 
     internal void EndGame() => isEnd = true;
