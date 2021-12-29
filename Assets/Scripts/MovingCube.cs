@@ -77,8 +77,10 @@ public class MovingCube : MonoBehaviour
         float max = MoveDirection == MoveDirection.Z ? LastCube.transform.localScale.z : LastCube.transform.localScale.x;
         if (Mathf.Abs(hangover) >= max) // 실패
         {
-            LastCube = null;
-            CurrentCube = null;
+            // LastCube = null;
+            // CurrentCube = null;
+            Destroy(LastCube.GetComponent<MovingCube>());
+            Destroy(CurrentCube.GetComponent<MovingCube>());
 
             this.gameObject.AddComponent<Rigidbody>();
 
@@ -134,6 +136,7 @@ public class MovingCube : MonoBehaviour
             GameManager.Instance.PerfectCountReset();
         }
 
+        Destroy(LastCube.GetComponent<MovingCube>());
         LastCube = this;
         Debug.Log(Mathf.Abs(hangover));
     }
@@ -163,10 +166,10 @@ public class MovingCube : MonoBehaviour
 
             window.transform.parent = CurrentCube.transform;
         }
-        Debug.Log("HowManyWindowZ" + HowManyWindowZ);
+        Debug.Log("HowManyWindowZ : " + HowManyWindowZ);
         Debug.Log(CurrentCube.transform.localScale.x / HowManyWindowX);
 
-        Debug.Log("HowManyWindowX" + HowManyWindowX);
+        Debug.Log("HowManyWindowX : " + HowManyWindowX);
         Debug.Log(CurrentCube.transform.localScale.x / HowManyWindowX);
     }
 

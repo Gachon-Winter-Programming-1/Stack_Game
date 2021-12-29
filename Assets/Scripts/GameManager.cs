@@ -44,7 +44,6 @@ public class GameManager : Singleton<GameManager>
         {
             if (isEnd)
             {
-                SaveAllCubes();
                 // TODO : Need to Change Component Reset Func
                 LoadScene();
             }
@@ -56,7 +55,6 @@ public class GameManager : Singleton<GameManager>
 
             if (!isEnd)
             {
-                // TODO : GameObject.Find() func is decrease to Performance. Change Camera cache variable.
                 cam.CameraMoveUp();
 
                 spawnerIndex = spawnerIndex == 0 ? 1 : 0;
@@ -83,7 +81,11 @@ public class GameManager : Singleton<GameManager>
         PrefabUtility.SaveAsPrefabAssetAndConnect(Empty, localPath, InteractionMode.UserAction);
     }
 
-    internal void EndGame() => isEnd = true;
+    internal void EndGame()
+    {
+        isEnd = true;
+        SaveAllCubes();
+    }
 
     internal void ScoreUp()
     {
