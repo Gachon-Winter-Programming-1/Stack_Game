@@ -82,15 +82,15 @@ public class MovingCube : MonoBehaviour
 
             this.gameObject.AddComponent<Rigidbody>();
 
-            GameManager.Instance.EndGame();
+           // GameManager.Instance.EndGame();
         }
         else if (Mathf.Abs(hangover) < correction_value) // 보정값을 포함한 완벽
         {
             transform.position = new Vector3(LastCube.transform.position.x, transform.position.y, LastCube.transform.position.z);
-            GameManager.Instance.ScoreUp();
-            GameManager.Instance.PerfectCountUp();
+           // GameManager.Instance.ScoreUp();
+            //GameManager.Instance.PerfectCountUp();
             AttachWindow();
-            GameManager.Instance.AddCubeToBeSaved(CurrentCube.gameObject);
+            //GameManager.Instance.AddCubeToBeSaved(CurrentCube.gameObject);
         }
         else
         {   // 잘릴때
@@ -104,12 +104,12 @@ public class MovingCube : MonoBehaviour
             {
                 SplitCubeOnX(hangover, direction);
             }
-            GameManager.Instance.ScoreUp();
-            GameManager.Instance.PerfectCountReset();
+            //GameManager.Instance.ScoreUp();
+           // GameManager.Instance.PerfectCountReset();
             AttachWindow();
-            GameManager.Instance.AddCubeToBeSaved(CurrentCube.gameObject);
+           // GameManager.Instance.AddCubeToBeSaved(CurrentCube.gameObject);
         }
-        if (GameManager.Instance.PerfectCountCheck() == 8)
+        //if (GameManager.Instance.PerfectCountCheck() == 8)
         {
             if (MoveDirection == MoveDirection.X)
             { //* x 방향으로 진행시, x Scale을 증가
@@ -131,7 +131,7 @@ public class MovingCube : MonoBehaviour
                         transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y, transform.localScale.z * objectScaleUpUnder);
                 }
             }
-            GameManager.Instance.PerfectCountReset();
+            //GameManager.Instance.PerfectCountReset();
         }
 
         LastCube = this;
@@ -139,6 +139,7 @@ public class MovingCube : MonoBehaviour
     }
     private void AttachWindow()
     {
+        
         float HowManyWindowZ = CurrentCube.transform.localScale.x / ((windowPrefab.transform.localScale.x + betweenWindows) * 10);
         float HowManyWindowX = CurrentCube.transform.localScale.z / ((windowPrefab.transform.localScale.x + betweenWindows) * 10);
 

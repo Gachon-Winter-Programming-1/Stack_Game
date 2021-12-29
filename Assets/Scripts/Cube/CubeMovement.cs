@@ -11,40 +11,47 @@ public class CubeMovement : MonoBehaviour
         X,Z
     }
 
-    public Direction direction;
+    public Direction side;
     public Transform targetCube;
     public float moveSpeed;
-
     private Vector3 normalDirection;
+    
+    
     private void OnEnable()
     {
-        direction = Direction.X;
-        normalDirection = new Vector3(1, 0, 0);
+        side = Direction.X;
+        normalDirection = Vector3.right;
     }
 
     private void Update()
     {
-        if ((-Constants.CUBEDISTANCE > targetCube.position.z  || targetCube.position.z > Constants.CUBEDISTANCE )
-            || (-Constants.CUBEDISTANCE > targetCube.position.x  || targetCube.position.x > Constants.CUBEDISTANCE))
-            normalDirection *= -1;
-        targetCube.transform.position += normalDirection * moveSpeed * Time.deltaTime;
-
+        Move();
     }
 
-
-    public Direction ChangeSide()
+    public void Move()
     {
-        direction = direction == Direction.X ? Direction.Z : Direction.X;
-        if (direction == Direction.X)
+        //todo : fix cube position
+        if ((-Constants.CUBEDISTANCE > targetCube.position.z  || targetCube.position.z > Constants.CUBEDISTANCE )
+            || (-Constants.CUBEDISTANCE > targetCube.position.x  || targetCube.position.x > Constants.CUBEDISTANCE))
+        {normalDirection *= -1;}
+        targetCube.position += normalDirection * moveSpeed * Time.deltaTime;
+
+    }
+    
+    
+    public Direction ChangeSide(Transform previousCube)
+    {
+        side = side == Direction.X ? Direction.Z : Direction.X;
+        if (side == Direction.X)
         {
-            targetCube.transform.position = new Vector3(Constants.CUBEDISTANCE, 0, 0);
+            targetCube.transform.position = new Vector3(Constants.CUBEDISTANCE, previousCube.position.y, previousCube.position.z);
             normalDirection = Vector3.right;
         }
-        else if (direction == Direction.Z)
+        else if (side == Direction.Z)
         {
-            targetCube.transform.position = new Vector3(0, 0, Constants.CUBEDISTANCE);
+            targetCube.transform.position = new Vector3(previousCube.position.x, previousCube.position.y, Constants.CUBEDISTANCE);
             normalDirection = Vector3.forward;
         }
-        return direction;
+        return side;
     }
 }
