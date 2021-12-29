@@ -8,6 +8,7 @@ using UnityEditor;
 
 public class GameManager : Singleton<GameManager>
 {
+    private UIManager uiManager;
     private CubeSpawner[] spawners;
     private int spawnerIndex;
     private CubeSpawner currentSpawner;
@@ -15,6 +16,7 @@ public class GameManager : Singleton<GameManager>
     private CameraController cam;
 
     public List<GameObject> CubesToBeSaved;
+    public GameObject currentCube;
 
     [SerializeField]
     private bool isEnd;
@@ -26,6 +28,7 @@ public class GameManager : Singleton<GameManager>
 
     private void Awake()
     {
+        uiManager = UIManager.Instance;
         isEnd = false;
         GameScore = 0;
         perfectCount = 0;
@@ -55,15 +58,22 @@ public class GameManager : Singleton<GameManager>
 
             if (!isEnd)
             {
-                cam.CameraMoveUp();
-
-                spawnerIndex = spawnerIndex == 0 ? 1 : 0;
-                currentSpawner = spawners[spawnerIndex];
-
-                currentSpawner.SpawnCube();
+                GameStart();
             }
         }
     }
+
+    public void GameStart()
+    {
+        cam.CameraMoveUp();
+
+        spawnerIndex = spawnerIndex == 0 ? 1 : 0;
+        currentSpawner = spawners[spawnerIndex];
+
+        currentSpawner.SpawnCube();
+        uiManager.ShowInGameUI();
+    }
+    
     internal void AddCubeToBeSaved(GameObject gameObject) => CubesToBeSaved.Add(gameObject);
 
     internal void SaveAllCubes()
@@ -84,12 +94,14 @@ public class GameManager : Singleton<GameManager>
     internal void EndGame()
     {
         isEnd = true;
+        CameraController.Instance.SetCamYPos(currentCube.transform.position.y);
         SaveAllCubes();
     }
 
     internal void ScoreUp()
     {
         GameScore++;
+        uiManager.SetScoreText(GameScore);
         Debug.Log("Score UP : " + GameScore);
     }
 

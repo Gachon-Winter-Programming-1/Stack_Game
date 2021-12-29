@@ -93,6 +93,7 @@ public class MovingCube : MonoBehaviour
             GameManager.Instance.PerfectCountUp();
             AttachWindow();
             GameManager.Instance.AddCubeToBeSaved(CurrentCube.gameObject);
+            GameManager.Instance.currentCube = CurrentCube.gameObject;
         }
         else
         {   // 잘릴때

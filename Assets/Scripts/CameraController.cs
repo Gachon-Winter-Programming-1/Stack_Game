@@ -11,4 +11,11 @@ public class CameraController : Singleton<CameraController>
         // StartCoroutine(Collection.MoveToPosition(transform, new Vector3(transform.position.x, cubePrefab.transform.position.y, transform.position.z), 0.3f));
         transform.position = new Vector3(transform.position.x, transform.position.y + cubePrefab.transform.localScale.y, transform.position.z);
     }
+
+    public void SetCamYPos(float distance)
+    {
+        transform.position = new Vector3(transform.position.x,distance,transform.position.z);
+        GetComponent<Camera>().orthographicSize = distance / 2f + 2;
+
+    }
 }
