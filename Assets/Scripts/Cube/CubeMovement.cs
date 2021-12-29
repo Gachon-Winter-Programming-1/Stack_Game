@@ -11,14 +11,14 @@ public class CubeMovement : MonoBehaviour
         X,Z
     }
 
-    public Direction side;
+    public Direction direction;
     public Transform targetCube;
     public float moveSpeed;
 
     private Vector3 normalDirection;
     private void OnEnable()
     {
-        side = Direction.X;
+        direction = Direction.X;
         normalDirection = new Vector3(1, 0, 0);
     }
 
@@ -34,17 +34,17 @@ public class CubeMovement : MonoBehaviour
 
     public Direction ChangeSide()
     {
-        side = side == Direction.X ? Direction.Z : Direction.X;
-        if (side == Direction.X)
+        direction = direction == Direction.X ? Direction.Z : Direction.X;
+        if (direction == Direction.X)
         {
             targetCube.transform.position = new Vector3(Constants.CUBEDISTANCE, 0, 0);
             normalDirection = Vector3.right;
         }
-        else if (side == Direction.Z)
+        else if (direction == Direction.Z)
         {
             targetCube.transform.position = new Vector3(0, 0, Constants.CUBEDISTANCE);
             normalDirection = Vector3.forward;
         }
-        return side;
+        return direction;
     }
 }

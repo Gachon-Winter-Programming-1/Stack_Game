@@ -22,7 +22,7 @@ public class CubeController : MonoBehaviour
     {
         if (Input.anyKeyDown)
         {
-            cubeDeploy.Deploy(currentCube, previousCube, cubeMovement.side);
+            cubeDeploy.Deploy(currentCube.transform, previousCube.transform, cubeMovement.direction);
         }
         
     }
