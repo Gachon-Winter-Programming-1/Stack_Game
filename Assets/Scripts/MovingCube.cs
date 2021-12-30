@@ -24,6 +24,8 @@ public class MovingCube : MonoBehaviour
     [SerializeField]
     private GameObject windowPrefab2;
     [SerializeField]
+    private GameObject pulsePrefab;
+    [SerializeField]
     private float betweenWindows;
 
     [SerializeField]
@@ -94,6 +96,7 @@ public class MovingCube : MonoBehaviour
             GameManager.Instance.ScoreUp();
             GameManager.Instance.PerfectCountUp();
             AttachWindow();
+            StartCoroutine("executePulse");
             GameManager.Instance.AddCubeToBeSaved(CurrentCube.gameObject);
             GameManager.Instance.currentCube = CurrentCube.gameObject;
         }
@@ -250,5 +253,17 @@ public class MovingCube : MonoBehaviour
         }
 
         cube.AddComponent<Rigidbody>();
+    }
+    IEnumerator executePulse()
+    {
+        var pulse = Instantiate(pulsePrefab);
+        var pulseVector = new Vector3(CurrentCube.transform.position.x, CurrentCube.transform.position.y - CurrentCube.transform.localScale.y / 2, CurrentCube.transform.position.z);
+        var pulseScale = new Vector3(CurrentCube.transform.localScale.x * 0.1f, 1, CurrentCube.transform.localScale.z * 0.1f);
+        pulse.transform.position = pulseVector;
+        pulse.transform.localScale = pulseScale;
+        yield return new WaitForSeconds(pulsePrefab.GetComponent<PulseEffect>().secondPulseStart);
+        var pulse2 = Instantiate(pulsePrefab);
+        pulse2.transform.position = pulseVector;
+        pulse2.transform.localScale = pulseScale;
     }
 }
