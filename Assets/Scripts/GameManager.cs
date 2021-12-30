@@ -18,8 +18,8 @@ public class GameManager : Singleton<GameManager>
     public List<GameObject> CubesToBeSaved;
     public GameObject currentCube;
 
-    [SerializeField]
-    private bool isEnd;
+    [SerializeField] private bool isEnd;
+    [SerializeField] private bool isStart;
 
     public int GameScore { get; private set; }
 
@@ -43,13 +43,8 @@ public class GameManager : Singleton<GameManager>
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButtonDown("Fire1") && isStart)
         {
-            if (isEnd)
-            {
-                // TODO : Need to Change Component Reset Func
-                LoadScene();
-            }
 
             if (MovingCube.CurrentCube != null)
             {
@@ -58,21 +53,37 @@ public class GameManager : Singleton<GameManager>
 
             if (!isEnd)
             {
-                GameStart();
+                
+                cam.CameraMoveUp();
+
+                spawnerIndex = spawnerIndex == 0 ? 1 : 0;
+                currentSpawner = spawners[spawnerIndex];
+
+                currentSpawner.SpawnCube();
             }
+            
         }
     }
 
     public void GameStart()
     {
+        isStart = true;
+        
         cam.CameraMoveUp();
 
         spawnerIndex = spawnerIndex == 0 ? 1 : 0;
         currentSpawner = spawners[spawnerIndex];
-
+        
         currentSpawner.SpawnCube();
-        uiManager.ShowInGameUI();
+        
+        uiManager.mainUIController.GameStart(); 
     }
+
+    public void GameRestart()
+    {
+        LoadScene();
+    }
+    
 
     internal void AddCubeToBeSaved(GameObject gameObject) => CubesToBeSaved.Add(gameObject);
 
@@ -102,6 +113,7 @@ public class GameManager : Singleton<GameManager>
     internal void EndGame()
     {
         isEnd = true;
+        uiManager.mainUIController.GameOver();
 
         // ! 오류 발견 저장은 되지만 CamYPos가 이상하게 잡힘
         CameraController.Instance.SetCamYPos(currentCube.transform.position.y);
@@ -111,7 +123,7 @@ public class GameManager : Singleton<GameManager>
     internal void ScoreUp()
     {
         GameScore++;
-        uiManager.SetScoreText(GameScore);
+        uiManager.mainUIController.SetScoreText(GameScore);
         Debug.Log("Score UP : " + GameScore);
     }
 
