@@ -1476,6 +1476,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2001532373, guid: c0d8eaf649b8c8346b42f66230d90309, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 434612844}
+    - target: {fileID: 2001532373, guid: c0d8eaf649b8c8346b42f66230d90309, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: GameRestart
+      objectReference: {fileID: 0}
     - target: {fileID: 811841689812491731, guid: c0d8eaf649b8c8346b42f66230d90309, type: 3}
       propertyPath: m_Name
       value: Gameover Canvas
