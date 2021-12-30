@@ -72,3 +72,4 @@ crashlytics-build.properties
 
 # Custom Ignore folder
 /[Aa]ssets/BuildingSaved/*
+.vscode/extensions.json
