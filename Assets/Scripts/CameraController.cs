@@ -14,11 +14,10 @@ public class CameraController : Singleton<CameraController>
 
     public void SetCamYPos(float distance)
     {
-        if (distance < 5f)
-            transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
-        else
-            transform.position = new Vector3(transform.position.x, distance, transform.position.z);
-        GetComponent<Camera>().orthographicSize = (distance / 2f) + 2;
-
+        float hypotenusepow, equilateralsqrt;
+        hypotenusepow = Mathf.Pow(distance, 2);
+        equilateralsqrt = hypotenusepow / 2;
+        transform.position = new Vector3(transform.position.x, 5 + distance, transform.position.z);
+        GetComponent<Camera>().orthographicSize = Mathf.Sqrt(equilateralsqrt) + 2;
     }
 }
