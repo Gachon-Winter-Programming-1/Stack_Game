@@ -73,29 +73,40 @@ public class GameManager : Singleton<GameManager>
         currentSpawner.SpawnCube();
         uiManager.ShowInGameUI();
     }
-    
+
     internal void AddCubeToBeSaved(GameObject gameObject) => CubesToBeSaved.Add(gameObject);
 
     internal void SaveAllCubes()
     {
-        GameObject Empty = new GameObject("Building");
-        foreach (GameObject gameObject in CubesToBeSaved)
+        if (CubesToBeSaved.Count != 0)
         {
-            gameObject.transform.parent = Empty.transform;
+            Debug.Log("Save");
+            GameObject Empty = new GameObject("Building");
+            foreach (GameObject gameObject in CubesToBeSaved)
+            {
+                gameObject.transform.parent = Empty.transform;
+            }
+
+            string localPath = "Assets/BuildingSaved/" + Empty.name + ".prefab";
+
+            localPath = AssetDatabase.GenerateUniqueAssetPath(localPath);
+
+            PrefabUtility.SaveAsPrefabAssetAndConnect(Empty, localPath, InteractionMode.UserAction);
         }
-
-        string localPath = "Assets/BuildingSaved/" + Empty.name + ".prefab";
-
-        localPath = AssetDatabase.GenerateUniqueAssetPath(localPath);
-
-        PrefabUtility.SaveAsPrefabAssetAndConnect(Empty, localPath, InteractionMode.UserAction);
+        else
+        {
+            Debug.Log("저장할 큐브가 존재하지 않습니다");
+        }
     }
 
     internal void EndGame()
     {
         isEnd = true;
-        CameraController.Instance.SetCamYPos(currentCube.transform.position.y);
+
+        // ! 오류 발견 저장은 되지만 CamYPos가 이상하게 잡힘
         SaveAllCubes();
+        if (currentCube != null)
+            CameraController.Instance.SetCamYPos(currentCube.transform.position.y);
     }
 
     internal void ScoreUp()

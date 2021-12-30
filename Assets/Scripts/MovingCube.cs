@@ -20,7 +20,9 @@ public class MovingCube : MonoBehaviour
     [SerializeField]
     private GameObject DropCube;
     [SerializeField]
-    private GameObject windowPrefab;
+    private GameObject windowPrefab1;
+    [SerializeField]
+    private GameObject windowPrefab2;
     [SerializeField]
     private float betweenWindows;
 
@@ -111,6 +113,7 @@ public class MovingCube : MonoBehaviour
             GameManager.Instance.PerfectCountReset();
             AttachWindow();
             GameManager.Instance.AddCubeToBeSaved(CurrentCube.gameObject);
+            GameManager.Instance.currentCube = CurrentCube.gameObject;
         }
         if (GameManager.Instance.PerfectCountCheck() == 8)
         {
@@ -143,14 +146,23 @@ public class MovingCube : MonoBehaviour
     }
     private void AttachWindow()
     {
-        float HowManyWindowZ = CurrentCube.transform.localScale.x / ((windowPrefab.transform.localScale.x + betweenWindows) * 10);
-        float HowManyWindowX = CurrentCube.transform.localScale.z / ((windowPrefab.transform.localScale.x + betweenWindows) * 10);
+        float HowManyWindowZ = CurrentCube.transform.localScale.x / ((windowPrefab1.transform.localScale.x + betweenWindows) * 10);
+        float HowManyWindowX = CurrentCube.transform.localScale.z / ((windowPrefab1.transform.localScale.x + betweenWindows) * 10);
 
         for (int i = 1; i < HowManyWindowZ; i++)
         {
-            var window = Instantiate(windowPrefab);
+            int random = UnityEngine.Random.Range(0, 10);
+            GameObject window;
+            if (random > 6)
+            {
+                window = Instantiate(windowPrefab1);
+            }
+            else
+            {
+                window = Instantiate(windowPrefab2);
+            }
             window.transform.position = new Vector3(
-            CurrentCube.transform.position.x + CurrentCube.transform.localScale.x / 2 - ((windowPrefab.transform.localScale.x + betweenWindows) * 10) * i + betweenWindows * 10,
+            CurrentCube.transform.position.x + CurrentCube.transform.localScale.x / 2 - ((windowPrefab1.transform.localScale.x + betweenWindows) * 10) * i + betweenWindows * 10,
             CurrentCube.transform.position.y,
             CurrentCube.transform.position.z + CurrentCube.transform.localScale.z / 2 + 0.001f);
 
@@ -160,10 +172,19 @@ public class MovingCube : MonoBehaviour
 
         for (int i = 1; i < HowManyWindowX; i++)
         {
-            var window = Instantiate(windowPrefab);
+            int random = UnityEngine.Random.Range(0, 10);
+            GameObject window;
+            if (random > 6)
+            {
+                window = Instantiate(windowPrefab1);
+            }
+            else
+            {
+                window = Instantiate(windowPrefab2);
+            }
             window.transform.position = new Vector3(CurrentCube.transform.position.x + CurrentCube.transform.localScale.x / 2 + 0.001f,
             CurrentCube.transform.position.y,
-            CurrentCube.transform.position.z - CurrentCube.transform.localScale.z / 2 + ((windowPrefab.transform.localScale.x + betweenWindows) * 10) * i - betweenWindows * 10);
+            CurrentCube.transform.position.z - CurrentCube.transform.localScale.z / 2 + ((windowPrefab1.transform.localScale.x + betweenWindows) * 10) * i - betweenWindows * 10);
 
             window.transform.parent = CurrentCube.transform;
         }
