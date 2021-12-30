@@ -8,8 +8,7 @@ public class CameraController : Singleton<CameraController>
     public GameObject cubePrefab;
     internal void CameraMoveUp()
     {
-        // StartCoroutine(Collection.MoveToPosition(transform, new Vector3(transform.position.x, cubePrefab.transform.position.y, transform.position.z), 0.3f));
-        transform.position = new Vector3(transform.position.x, transform.position.y + cubePrefab.transform.localScale.y, transform.position.z);
+        StartCoroutine(Collection.MoveToPosition(transform, new Vector3(transform.position.x, transform.position.y + cubePrefab.transform.localScale.y, transform.position.z), 0.1f));
     }
 
     public void SetCamYPos(float distance)
