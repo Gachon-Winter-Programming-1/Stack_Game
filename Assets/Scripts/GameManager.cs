@@ -112,6 +112,7 @@ public class GameManager : Singleton<GameManager>
 
     internal void EndGame()
     {
+        
         isEnd = true;
         uiManager.mainUIController.GameOver();
 
