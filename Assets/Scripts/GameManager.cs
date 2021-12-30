@@ -104,9 +104,8 @@ public class GameManager : Singleton<GameManager>
         isEnd = true;
 
         // ! 오류 발견 저장은 되지만 CamYPos가 이상하게 잡힘
+        CameraController.Instance.SetCamYPos(currentCube.transform.position.y);
         SaveAllCubes();
-        if (currentCube != null)
-            CameraController.Instance.SetCamYPos(currentCube.transform.position.y);
     }
 
     internal void ScoreUp()
