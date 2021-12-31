@@ -2,11 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
-
-public class BuildingManager : MonoBehaviour
+using Singleton;
+public class BuildingManager : Singleton<BuildingManager>
 {
     public List<GameObject> gameObjects;
-
     internal int count;
     public int distance;
     // Start is called before the first frame update
@@ -35,5 +34,12 @@ public class BuildingManager : MonoBehaviour
             Quaternion.Euler(0, 135, 0)));
             count++;
         }
+    }
+
+    IEnumerator destroyBuilding(int index)
+    {
+        yield return new WaitForSeconds(1f);
+        gameObjects.RemoveAt(index);
+
     }
 }

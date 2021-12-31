@@ -10,5 +10,5 @@ EditorBuildSettings:
     guid: 39927d463389ef8408619ae1738c3f73
   - enabled: 1
     path: Assets/Scenes/ChooseBuildingScene.unity
-    guid: 4f683301706c80448b292b1d0cdf27d0
+    guid: f8146a270ed99a7479e1b55f5d2c125f
   m_configObjects: {}

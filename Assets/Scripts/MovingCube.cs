@@ -99,6 +99,7 @@ public class MovingCube : MonoBehaviour
             StartCoroutine("executePulse");
             GameManager.Instance.AddCubeToBeSaved(CurrentCube.gameObject);
             GameManager.Instance.currentCube = CurrentCube.gameObject;
+            SoundController.Instance.UpKeyPlay();
         }
         else
         {   // 잘릴때
@@ -117,6 +118,7 @@ public class MovingCube : MonoBehaviour
             AttachWindow();
             GameManager.Instance.AddCubeToBeSaved(CurrentCube.gameObject);
             GameManager.Instance.currentCube = CurrentCube.gameObject;
+            SoundController.Instance.ResetKeyPlay();
         }
         if (GameManager.Instance.PerfectCountCheck() == 8)
         {
