@@ -150,7 +150,7 @@ public class MeshDestroy : MonoBehaviour
                                         original.UV[triangles[j + singleIndex]],
                                         Vector2.Lerp(original.UV[triangles[j + singleIndex]], original.UV[triangles[j + ((singleIndex + 1) % 3)]], lerp1),
                                         Vector2.Lerp(original.UV[triangles[j + singleIndex]], original.UV[triangles[j + ((singleIndex + 2) % 3)]], lerp2));
-                    
+
                     continue;
                 }
 
@@ -280,10 +280,10 @@ public class MeshDestroy : MonoBehaviour
             mesh.vertices = Vertices;
             mesh.normals = Normals;
             mesh.uv = UV;
-            for(var i = 0; i < Triangles.Length; i++)
+            for (var i = 0; i < Triangles.Length; i++)
                 mesh.SetTriangles(Triangles[i], i, true);
             Bounds = mesh.bounds;
-            
+
             var renderer = GameObject.AddComponent<MeshRenderer>();
             renderer.materials = original.GetComponent<MeshRenderer>().materials;
 
@@ -293,6 +293,8 @@ public class MeshDestroy : MonoBehaviour
             var collider = GameObject.AddComponent<MeshCollider>();
             collider.convex = true;
             var rigidbody = GameObject.AddComponent<Rigidbody>();
+
+            GameObject.AddComponent<SelfDestroy>();
 
             //var meshDestroy = GameObject.AddComponent<MeshDestroy>();
             //meshDestroy.CutCascades = original.CutCascades;
