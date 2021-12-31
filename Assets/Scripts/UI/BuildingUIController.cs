@@ -39,6 +39,7 @@ public class BuildingUIController : MonoBehaviour
 
     public void DestroyBuilding()
     {
-        //StartCoroutine(BuildingManager.Instance.destroyBuilding(cmMove.index));
+        StartCoroutine(BuildingManager.Instance.destroyBuilding(cmMove.index));
+        StartCoroutine(Collection.WaitThenCallback(1f, () => { NextBuilding(); }));
     }
 }

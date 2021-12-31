@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using UnityEngine;
 
 public class MeshDestroy : MonoBehaviour
@@ -16,6 +17,7 @@ public class MeshDestroy : MonoBehaviour
 
     private void Start()
     {
+        DestroyMesh();
 
     }
 
@@ -24,7 +26,6 @@ public class MeshDestroy : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            DestroyMesh();
 
         }
     }
@@ -291,11 +292,11 @@ public class MeshDestroy : MonoBehaviour
 
             var collider = GameObject.AddComponent<MeshCollider>();
             collider.convex = true;
-
             var rigidbody = GameObject.AddComponent<Rigidbody>();
-            var meshDestroy = GameObject.AddComponent<MeshDestroy>();
-            meshDestroy.CutCascades = original.CutCascades;
-            meshDestroy.ExplodeForce = original.ExplodeForce;
+
+            //var meshDestroy = GameObject.AddComponent<MeshDestroy>();
+            //meshDestroy.CutCascades = original.CutCascades;
+            //meshDestroy.ExplodeForce = original.ExplodeForce;
 
         }
 
