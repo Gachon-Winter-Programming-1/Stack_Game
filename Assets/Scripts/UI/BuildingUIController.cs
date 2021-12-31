@@ -12,7 +12,7 @@ public class BuildingUIController : MonoBehaviour
 
     private void Start()
     {
-        //scoreText.text = cmMove.currentTarget.childCount.ToString();
+        scoreText.text = cmMove.currentTarget.childCount.ToString();
     }
 
     public void NextBuilding()
@@ -39,6 +39,6 @@ public class BuildingUIController : MonoBehaviour
 
     public void DestroyBuilding()
     {
-        //cmMove.currentTarget
+        //StartCoroutine(BuildingManager.Instance.destroyBuilding(cmMove.index));
     }
 }

@@ -10,6 +10,7 @@ public class MainUIController : MonoBehaviour
     public GameObject MainCanvas;
     public GameObject InGameCanvas;
     public GameObject GameOverCanvas;
+    public GameObject RankPopupCanvas;
     public Image MuteButton;
 
     [Header("Detailed UI components")] 
@@ -22,7 +23,6 @@ public class MainUIController : MonoBehaviour
     private void Start()
     {
         UIManager.Instance.mainUIController = this;
-        ;
         MainCanvas.SetActive(true);
         InGameCanvas.SetActive(false);
         GameOverCanvas.SetActive(false);
@@ -57,12 +57,23 @@ public class MainUIController : MonoBehaviour
     {
         AudioListener.pause = !AudioListener.pause;
         if (AudioListener.pause)
+        {
             MuteButton.sprite = muteOn;
-        else MuteButton.sprite = muteOff;
+            AudioListener.volume = 1f;
+        }
+        else
+        {
+            MuteButton.sprite = muteOff;
+            AudioListener.volume = 0f;
+        }
     }
     public void OpenGithub()
     {
         Application.OpenURL("https://github.com/Gachon-Winter-Programming-1/Stack_Game");
     }
+    
+    public void DisableRankPopup(){ RankPopupCanvas.SetActive(false);}
+    
+    public void EnableRankPopup(){ RankPopupCanvas.SetActive(true);}
 
 }

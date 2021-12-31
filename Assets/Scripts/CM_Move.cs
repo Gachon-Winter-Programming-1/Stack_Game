@@ -6,7 +6,7 @@ using Cinemachine;
 public class CM_Move : MonoBehaviour
 {
     public CinemachineVirtualCamera vircam = null;
-    private int index;
+    public int index;
     public Transform currentTarget; 
 
     private BuildingManager buildingManager;

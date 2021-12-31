@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using Singleton;
+using UnityEngine.SocialPlatforms.Impl;
+
 public class BuildingManager : Singleton<BuildingManager>
 {
     public List<GameObject> gameObjects;
@@ -15,6 +17,7 @@ public class BuildingManager : Singleton<BuildingManager>
     }
     void Start()
     {
+        
     }
 
     // Update is called once per frame
@@ -36,10 +39,17 @@ public class BuildingManager : Singleton<BuildingManager>
         }
     }
 
-    IEnumerator destroyBuilding(int index)
+    public IEnumerator destroyBuilding(int index)
     {
+        Transform[] cubes = gameObjects[index].GetComponentsInChildren<Transform>();
+        foreach (Transform cube in cubes)
+        {
+            cube.gameObject.AddComponent<MeshDestroy>();
+        }
         yield return new WaitForSeconds(1f);
         gameObjects.RemoveAt(index);
+        //destroy asset data funcs
+        Destroy(gameObjects[index]);
 
     }
 }
