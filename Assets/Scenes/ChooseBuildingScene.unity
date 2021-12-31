@@ -518,13 +518,13 @@ MonoBehaviour:
   m_HorizontalDamping: 0.5
   m_VerticalDamping: 0.5
   m_ScreenX: 0.5
-  m_ScreenY: 0.35
+  m_ScreenY: 0.5
   m_DeadZoneWidth: 0
   m_DeadZoneHeight: 0
-  m_SoftZoneWidth: 0.55
-  m_SoftZoneHeight: 0.55
+  m_SoftZoneWidth: 0.8
+  m_SoftZoneHeight: 0.8
   m_BiasX: 0
-  m_BiasY: 0.00000005418604
+  m_BiasY: 0
   m_CenterOnActivate: 1
 --- !u!114 &480723228
 MonoBehaviour:
@@ -582,8 +582,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameObjects: []
-  BuildingY: 0
-  distance: 10
+  distance: 5
 --- !u!1 &1073846997
 GameObject:
   m_ObjectHideFlags: 0
