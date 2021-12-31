@@ -17,7 +17,7 @@ public class BuildingManager : Singleton<BuildingManager>
     }
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -27,6 +27,7 @@ public class BuildingManager : Singleton<BuildingManager>
 
     internal void DisposeBuilding()
     {
+#if UNITY_EDITOR
         string[] arr = AssetDatabase.FindAssets("", new string[] { "Assets/BuildingSaved" });
         count = 0;
         foreach (string str in arr)
@@ -37,6 +38,7 @@ public class BuildingManager : Singleton<BuildingManager>
             Quaternion.Euler(0, 135, 0)));
             count++;
         }
+#endif
     }
 
     public IEnumerator destroyBuilding(int index)

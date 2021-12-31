@@ -37,6 +37,7 @@ public class GameManager : Singleton<GameManager>
 
     private void Start()
     {
+        Screen.SetResolution(540, 960, false);
         cam = GameObject.Find("@Main Camera").GetComponent<CameraController>();
         CubesToBeSaved = new List<GameObject>();
     }
@@ -53,7 +54,7 @@ public class GameManager : Singleton<GameManager>
 
             if (!isEnd)
             {
-                
+
                 cam.CameraMoveUp();
 
                 spawnerIndex = spawnerIndex == 0 ? 1 : 0;
@@ -61,34 +62,35 @@ public class GameManager : Singleton<GameManager>
 
                 currentSpawner.SpawnCube();
             }
-            
+
         }
     }
 
     public void GameStart()
     {
         isStart = true;
-        
+
         cam.CameraMoveUp();
 
         spawnerIndex = spawnerIndex == 0 ? 1 : 0;
         currentSpawner = spawners[spawnerIndex];
-        
+
         currentSpawner.SpawnCube();
-        
-        uiManager.mainUIController.GameStart(); 
+
+        uiManager.mainUIController.GameStart();
     }
 
     public void GameRestart()
     {
         LoadScene();
     }
-    
+
 
     internal void AddCubeToBeSaved(GameObject gameObject) => CubesToBeSaved.Add(gameObject);
 
     internal void SaveAllCubes()
     {
+#if UNITY_EDITOR
         if (CubesToBeSaved.Count != 0)
         {
             Debug.Log("Save");
@@ -108,11 +110,12 @@ public class GameManager : Singleton<GameManager>
         {
             Debug.Log("저장할 큐브가 존재하지 않습니다");
         }
+#endif
     }
 
     internal void EndGame()
     {
-        
+
         isEnd = true;
         uiManager.mainUIController.GameOver();
 
